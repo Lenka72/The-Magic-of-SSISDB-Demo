@@ -1,17 +1,16 @@
-USE RandomActsOfSQL
+USE dw_valuation;
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_ssis_run_on_demand]    Script Date: 2/23/2018 8:29:38 PM ******/
-DROP PROCEDURE IF EXISTS [dbo].[usp_ssis_run_on_demand]
+/****** Object:  StoredProcedure [dbo].[usp_ssis_run_on_demand]    Script Date: 5/11/2018 9:59:22 AM ******/
+DROP PROCEDURE dbo.usp_ssis_run_on_demand;
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_ssis_run_on_demand]    Script Date: 2/23/2018 8:29:38 PM ******/
-SET ANSI_NULLS ON
+/****** Object:  StoredProcedure [dbo].[usp_ssis_run_on_demand]    Script Date: 5/11/2018 9:59:22 AM ******/
+SET ANSI_NULLS ON;
 GO
 
-SET QUOTED_IDENTIFIER ON
+SET QUOTED_IDENTIFIER ON;
 GO
-
 
 -- ================================================
 -- Author:		Elaena Bakman		 
@@ -21,7 +20,7 @@ GO
 -- Update:		
 -- ================================================
 
-CREATE PROCEDURE [dbo].[usp_ssis_run_on_demand] (
+CREATE PROCEDURE dbo.usp_ssis_run_on_demand (
         @FolderName NVARCHAR(MAX)
        ,@ProjectName NVARCHAR(MAX)
        ,@PackageName NVARCHAR(MAX))
@@ -33,11 +32,11 @@ BEGIN
                ,@ReferenceId AS INT;
 
         SET @ReferenceId =
-        (SELECT     ER.reference_id
-         FROM       SSISDB.catalog.environment_references ER
-         INNER   JOIN SSISDB.catalog.projects P
+        (SELECT         ER.reference_id
+         FROM           SSISDB.catalog.environment_references ER
+         INNER   JOIN   SSISDB.catalog.projects P
          ON P.project_id = ER.project_id
-         WHERE      P.name = @ProjectName);
+         WHERE          P.name = @ProjectName);
 
         EXECUTE SSISDB.catalog.create_execution @folder_name = @FolderName
                                                ,@project_name = @ProjectName
@@ -48,5 +47,3 @@ BEGIN
         EXECUTE SSISDB.catalog.start_execution @execution_id = @ExecutionId;
 END;
 GO
-
-
