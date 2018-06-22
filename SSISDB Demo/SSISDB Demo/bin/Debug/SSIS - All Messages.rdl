@@ -1,0 +1,1518 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report MustUnderstand="df" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:df="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition/defaultfontfamily">
+  <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="SSISDBDemo">
+      <DataSourceReference>SSISDBDemo</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>7d03e069-6289-4131-b222-53dff10de9e3</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="SSISAllMessages">
+      <Query>
+        <DataSourceName>SSISDBDemo</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@ExecutionID">
+            <Value>=Parameters!ExecutionID.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>usp_ssis_all_messages_report</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="ReferenceId">
+          <DataField>ReferenceId</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="MessageCode">
+          <DataField>MessageCode</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ExecutionPath">
+          <DataField>ExecutionPath</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PackagePath">
+          <DataField>PackagePath</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SubComponentName">
+          <DataField>SubComponentName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MessageSourceId">
+          <DataField>MessageSourceId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MessageSourceName">
+          <DataField>MessageSourceName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="EventName">
+          <DataField>EventName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ExtendedInformationId">
+          <DataField>ExtendedInformationId</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="Message">
+          <DataField>Message</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MessageSourceType">
+          <DataField>MessageSourceType</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="MessageType">
+          <DataField>MessageType</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="MessageTime">
+          <DataField>MessageTime</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="OperationId">
+          <DataField>OperationId</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="EventMessageId">
+          <DataField>EventMessageId</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="ReferenceType">
+          <DataField>ReferenceType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="EnvironmentFolderName">
+          <DataField>EnvironmentFolderName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="EnvironmentName">
+          <DataField>EnvironmentName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Environment">
+          <DataField>Environment</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="ReportStyle">
+      <Query>
+        <DataSourceName>SSISDBDemo</DataSourceName>
+        <CommandText>SELECT  IQ.StyleName
+       ,IQ.FontFamily
+       ,IQ.FontSize
+       ,IQ.FontWeight
+       ,IQ.BackgroundColor
+       ,IQ.FontColor
+FROM    (VALUES
+                 ('Heading1', 'calibri', '24pt', 1, NULL, '#1976D2')
+                ,('Heading2', 'calibri', '12pt', 0, NULL, '#1976D2')
+                ,('Heading3', 'calibri', '11pt', 1, NULL, '#1976D2')
+                ,('Heading4', 'calibri', '11pt', 0, NULL, '#1976D2')
+                ,('Heading5', 'calibri', '10pt', 1, NULL, '#1976D2')
+                ,('TableHeading', 'calibri', '11pt', 1, '#1976D2', '#FFFFFF')
+                ,('TableSubLevel1', 'calibri', '10pt', 0, '#BDBDBD', '#000000')
+                ,('TableSubLevel2', 'calibri', '10pt', 0, '#E0E0E0', '#000000')
+                ,('TableSubLevel3', 'calibri', '10pt', 0, NULL, '#000000')
+                ,('TableCellWarning', 'calibri', '10pt', 0, '#FFEBEE', '#BB2124')
+                ,('TableAlternatingRows', 'calibri', '10pt', 0, '#E0E0E0', '#000000')
+                ,('BodyText', 'calibri', '10pt', 0, NULL, '#000000')
+                ,('BodyTextWarning', 'calibri', '10pt', 0, NULL, '#BB2124')
+                ,('BodyTextSuccess', 'calibri', '10pt', 0, NULL, '#4CAF50')
+                ,('Buttons', 'calibri', '10pt', 1, '#1976D2', '#FFFFFF')
+                ,('TableCurrentRow', 'calibri', '10pt', 0, '#FFE57F', '#000000')
+                ,('TableHeadingSubLevel', 'calibri', '10pt', 1, '#1E88E5', '#FFFFFF')
+                ,('BodyTextSubLevel', 'calibri', '8pt', 0, NULL, '#84888F')
+                ,('MainMenu', 'calibri', '14pt', 0, NULL, '#1976D2')) IQ (StyleName, FontFamily, FontSize, FontWeight, BackgroundColor, FontColor);</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="StyleName">
+          <DataField>StyleName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FontFamily">
+          <DataField>FontFamily</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FontSize">
+          <DataField>FontSize</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FontWeight">
+          <DataField>FontWeight</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="BackgroundColor">
+          <DataField>BackgroundColor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FontColor">
+          <DataField>FontColor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Tablix Name="table1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>1in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>5in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.5in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.35417in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.34375in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.5in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.22in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox17">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Message Code</Value>
+                                  <Style>
+                                    <FontFamily>=Variables!TableHeading_FontFamily.Value</FontFamily>
+                                    <FontSize>=Variables!TableHeading_FontSize.Value</FontSize>
+                                    <FontWeight>=Variables!TableHeading_FontWeight.Value</FontWeight>
+                                    <Color>=Variables!TableHeading_FontColor.Value</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox17</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <BackgroundColor>=Variables!TableHeading_BackgroundColor.Value</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Message</Value>
+                                  <Style>
+                                    <FontFamily>=Variables!TableHeading_FontFamily.Value</FontFamily>
+                                    <FontSize>=Variables!TableHeading_FontSize.Value</FontSize>
+                                    <FontWeight>=Variables!TableHeading_FontWeight.Value</FontWeight>
+                                    <Color>=Variables!TableHeading_FontColor.Value</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox2</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <BackgroundColor>=Variables!TableHeading_BackgroundColor.Value</BackgroundColor>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox3">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Message Source Name</Value>
+                                  <Style>
+                                    <FontFamily>=Variables!TableHeading_FontFamily.Value</FontFamily>
+                                    <FontSize>=Variables!TableHeading_FontSize.Value</FontSize>
+                                    <FontWeight>=Variables!TableHeading_FontWeight.Value</FontWeight>
+                                    <Color>=Variables!TableHeading_FontColor.Value</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox3</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <BackgroundColor>=Variables!TableHeading_BackgroundColor.Value</BackgroundColor>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox4">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Event Name</Value>
+                                  <Style>
+                                    <FontFamily>=Variables!TableHeading_FontFamily.Value</FontFamily>
+                                    <FontSize>=Variables!TableHeading_FontSize.Value</FontSize>
+                                    <FontWeight>=Variables!TableHeading_FontWeight.Value</FontWeight>
+                                    <Color>=Variables!TableHeading_FontColor.Value</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox4</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <BackgroundColor>=Variables!TableHeading_BackgroundColor.Value</BackgroundColor>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>2</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox5">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Message Time</Value>
+                                  <Style>
+                                    <FontFamily>=Variables!TableHeading_FontFamily.Value</FontFamily>
+                                    <FontSize>=Variables!TableHeading_FontSize.Value</FontSize>
+                                    <FontWeight>=Variables!TableHeading_FontWeight.Value</FontWeight>
+                                    <Color>=Variables!TableHeading_FontColor.Value</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox5</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <BackgroundColor>=Variables!TableHeading_BackgroundColor.Value</BackgroundColor>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox6">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Execution Path</Value>
+                                  <Style>
+                                    <FontFamily>=Variables!TableHeading_FontFamily.Value</FontFamily>
+                                    <FontSize>=Variables!TableHeading_FontSize.Value</FontSize>
+                                    <FontWeight>=Variables!TableHeading_FontWeight.Value</FontWeight>
+                                    <Color>=Variables!TableHeading_FontColor.Value</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox6</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <BackgroundColor>=Variables!TableHeading_BackgroundColor.Value</BackgroundColor>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox7">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Package Path</Value>
+                                  <Style>
+                                    <FontFamily>=Variables!TableHeading_FontFamily.Value</FontFamily>
+                                    <FontSize>=Variables!TableHeading_FontSize.Value</FontSize>
+                                    <FontWeight>=Variables!TableHeading_FontWeight.Value</FontWeight>
+                                    <Color>=Variables!TableHeading_FontColor.Value</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox7</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <BackgroundColor>=Variables!TableHeading_BackgroundColor.Value</BackgroundColor>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox8">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Message Source Id</Value>
+                                  <Style>
+                                    <FontFamily>=Variables!TableHeading_FontFamily.Value</FontFamily>
+                                    <FontSize>=Variables!TableHeading_FontSize.Value</FontSize>
+                                    <FontWeight>=Variables!TableHeading_FontWeight.Value</FontWeight>
+                                    <Color>=Variables!TableHeading_FontColor.Value</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox8</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <BackgroundColor>=Variables!TableHeading_BackgroundColor.Value</BackgroundColor>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox9">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Environment</Value>
+                                  <Style>
+                                    <FontFamily>=Variables!TableHeading_FontFamily.Value</FontFamily>
+                                    <FontSize>=Variables!TableHeading_FontSize.Value</FontSize>
+                                    <FontWeight>=Variables!TableHeading_FontWeight.Value</FontWeight>
+                                    <Color>=Variables!TableHeading_FontColor.Value</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox9</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <BackgroundColor>=Variables!TableHeading_BackgroundColor.Value</BackgroundColor>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.21in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="MessageCode">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!MessageCode.Value</Value>
+                                  <Style>
+                                    <FontFamily>=Variables!BodyText_FontFamily.Value</FontFamily>
+                                    <FontSize>=Variables!BodyText_FontSize.Value</FontSize>
+                                    <FontWeight>=Variables!BodyText_FontWeight.Value</FontWeight>
+                                    <Color>=Variables!BodyText_FontColor.Value</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>MessageCode</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Message">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Message.Value</Value>
+                                  <Style>
+                                    <FontFamily>=Variables!BodyText_FontFamily.Value</FontFamily>
+                                    <FontSize>=Variables!BodyText_FontSize.Value</FontSize>
+                                    <FontWeight>=Variables!BodyText_FontWeight.Value</FontWeight>
+                                    <Color>=Variables!BodyText_FontColor.Value</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Message</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="MessageSourceName">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!MessageSourceName.Value</Value>
+                                  <Style>
+                                    <FontFamily>=Variables!BodyText_FontFamily.Value</FontFamily>
+                                    <FontSize>=Variables!BodyText_FontSize.Value</FontSize>
+                                    <FontWeight>=Variables!BodyText_FontWeight.Value</FontWeight>
+                                    <Color>=Variables!BodyText_FontColor.Value</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>MessageSourceName</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="EventName">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!EventName.Value</Value>
+                                  <Style>
+                                    <FontFamily>=Variables!BodyText_FontFamily.Value</FontFamily>
+                                    <FontSize>=Variables!BodyText_FontSize.Value</FontSize>
+                                    <FontWeight>=Variables!BodyText_FontWeight.Value</FontWeight>
+                                    <Color>=Variables!BodyText_FontColor.Value</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>EventName</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Rectangle Name="Rectangle1">
+                          <ReportItems>
+                            <Image Name="ErrorsAndWarnings">
+                              <Source>Embedded</Source>
+                              <Value>= Switch(Fields!EventName.Value = "OnError", "Error", 
+Fields!EventName.Value = "OnWarning", "Warning",
+Fields!EventName.Value = "OnInformation", "Information")</Value>
+                              <Left>0.11458in</Left>
+                              <Height>0.21in</Height>
+                              <Width>0.22917in</Width>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                              </Style>
+                            </Image>
+                          </ReportItems>
+                          <KeepTogether>true</KeepTogether>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Style>None</Style>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Style>None</Style>
+                            </RightBorder>
+                          </Style>
+                        </Rectangle>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="MessageTime">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!MessageTime.Value</Value>
+                                  <Style>
+                                    <FontFamily>=Variables!BodyText_FontFamily.Value</FontFamily>
+                                    <FontSize>=Variables!BodyText_FontSize.Value</FontSize>
+                                    <FontWeight>=Variables!BodyText_FontWeight.Value</FontWeight>
+                                    <Format>MM/dd/yyyy hh:mm:ss</Format>
+                                    <Color>=Variables!BodyText_FontColor.Value</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>MessageTime</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="ExecutionPath">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!ExecutionPath.Value</Value>
+                                  <Style>
+                                    <FontFamily>=Variables!BodyText_FontFamily.Value</FontFamily>
+                                    <FontSize>=Variables!BodyText_FontSize.Value</FontSize>
+                                    <FontWeight>=Variables!BodyText_FontWeight.Value</FontWeight>
+                                    <Color>=Variables!BodyText_FontColor.Value</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>ExecutionPath</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="PackagePath">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!PackagePath.Value</Value>
+                                  <Style>
+                                    <FontFamily>=Variables!BodyText_FontFamily.Value</FontFamily>
+                                    <FontSize>=Variables!BodyText_FontSize.Value</FontSize>
+                                    <FontWeight>=Variables!BodyText_FontWeight.Value</FontWeight>
+                                    <Color>=Variables!BodyText_FontColor.Value</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>PackagePath</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="MessageSourceId">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!MessageSourceId.Value</Value>
+                                  <Style>
+                                    <FontFamily>=Variables!BodyText_FontFamily.Value</FontFamily>
+                                    <FontSize>=Variables!BodyText_FontSize.Value</FontSize>
+                                    <FontWeight>=Variables!BodyText_FontWeight.Value</FontWeight>
+                                    <Color>=Variables!BodyText_FontColor.Value</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>MessageSourceId</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Environment">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Environment.Value</Value>
+                                  <Style>
+                                    <FontFamily>=Variables!BodyText_FontFamily.Value</FontFamily>
+                                    <FontSize>=Variables!BodyText_FontSize.Value</FontSize>
+                                    <FontWeight>=Variables!BodyText_FontWeight.Value</FontWeight>
+                                    <Color>=Variables!BodyText_FontColor.Value</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Environment</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                  <RepeatOnNewPage>true</RepeatOnNewPage>
+                  <KeepTogether>true</KeepTogether>
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="table1_Details_Group">
+                    <DataElementName>Detail</DataElementName>
+                  </Group>
+                  <TablixMembers>
+                    <TablixMember />
+                  </TablixMembers>
+                  <DataElementName>Detail_Collection</DataElementName>
+                  <DataElementOutput>Output</DataElementOutput>
+                  <KeepTogether>true</KeepTogether>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>SSISAllMessages</DataSetName>
+            <Top>0.15in</Top>
+            <Left>0.25in</Left>
+            <Height>0.43in</Height>
+            <Width>18.69792in</Width>
+            <Style />
+          </Tablix>
+        </ReportItems>
+        <Height>0.74542in</Height>
+        <Style />
+      </Body>
+      <Width>19.1875in</Width>
+      <Page>
+        <PageHeader>
+          <Height>1.1875in</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="textbox1">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>SSIS - All Messages </Value>
+                      <Style>
+                        <FontFamily>=Variables!Heading1_FontFamily.Value</FontFamily>
+                        <FontSize>=Variables!Heading1_FontSize.Value</FontSize>
+                        <FontWeight>=Variables!Heading1_FontWeight.Value</FontWeight>
+                        <Color>=Variables!Heading1_FontColor.Value</Color>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Label>ExecutionID</Label>
+                      <Value>= Parameters!ExecutionID.Value</Value>
+                      <Style>
+                        <FontFamily>=Variables!Heading1_FontFamily.Value</FontFamily>
+                        <FontSize>=Variables!Heading1_FontSize.Value</FontSize>
+                        <FontWeight>=Variables!Heading1_FontWeight.Value</FontWeight>
+                        <Color>=Variables!Heading1_FontColor.Value</Color>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>textbox1</rd:DefaultName>
+              <Top>0.25in</Top>
+              <Left>0.25in</Left>
+              <Height>0.43in</Height>
+              <Width>9.19792in</Width>
+              <Style>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox12">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=FormatDateTime(Globals!ExecutionTime,DateFormat.LongDate)</Value>
+                      <Style>
+                        <FontFamily>Tahoma</FontFamily>
+                        <FontSize>6pt</FontSize>
+                        <Color>#706a53</Color>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox7</rd:DefaultName>
+              <Top>0.43in</Top>
+              <Left>17.35417in</Left>
+              <Height>0.25in</Height>
+              <Width>1.59375in</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Rectangle Name="MainMenu">
+              <ReportItems>
+                <Textbox Name="Textbox26">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>Main Menu</Value>
+                          <Style>
+                            <FontFamily>=Variables!Heading2_FontFamily.Value</FontFamily>
+                            <FontSize>=Variables!Heading2_FontSize.Value</FontSize>
+                            <FontWeight>=Variables!Heading2_FontWeight.Value</FontWeight>
+                            <Color>=Variables!Heading2_FontColor.Value</Color>
+                          </Style>
+                        </TextRun>
+                      </TextRuns>
+                      <Style>
+                        <TextAlign>Left</TextAlign>
+                      </Style>
+                    </Paragraph>
+                  </Paragraphs>
+                  <rd:DefaultName>Textbox13</rd:DefaultName>
+                  <ActionInfo>
+                    <Actions>
+                      <Action>
+                        <Drillthrough>
+                          <ReportName>Valuation - Main Menu</ReportName>
+                        </Drillthrough>
+                      </Action>
+                    </Actions>
+                  </ActionInfo>
+                  <Height>0.25in</Height>
+                  <Width>0.88542in</Width>
+                  <Style>
+                    <Border>
+                      <Style>None</Style>
+                    </Border>
+                    <VerticalAlign>Middle</VerticalAlign>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                </Textbox>
+                <Textbox Name="AllExecutions">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>= "All Executions"</Value>
+                          <Style>
+                            <FontFamily>= Variables!Heading2_FontFamily.Value</FontFamily>
+                            <FontSize>= Variables!Heading2_FontSize.Value</FontSize>
+                            <FontWeight>= Variables!Heading2_FontWeight.Value</FontWeight>
+                            <Color>= Variables!Heading2_FontColor.Value</Color>
+                          </Style>
+                        </TextRun>
+                      </TextRuns>
+                      <Style />
+                    </Paragraph>
+                  </Paragraphs>
+                  <ActionInfo>
+                    <Actions>
+                      <Action>
+                        <Drillthrough>
+                          <ReportName>SSIS - All Executions</ReportName>
+                        </Drillthrough>
+                      </Action>
+                    </Actions>
+                  </ActionInfo>
+                  <Left>0.95486in</Left>
+                  <Height>0.25in</Height>
+                  <Width>3.70833in</Width>
+                  <ZIndex>1</ZIndex>
+                  <Style>
+                    <Border>
+                      <Style>None</Style>
+                    </Border>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                </Textbox>
+              </ReportItems>
+              <KeepTogether>true</KeepTogether>
+              <Top>0.84307in</Top>
+              <Left>0.25in</Left>
+              <Height>0.27499in</Height>
+              <Width>9.19792in</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+              </Style>
+            </Rectangle>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageHeader>
+        <PageFooter>
+          <Height>0.25in</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageFooter>
+        <LeftMargin>1in</LeftMargin>
+        <RightMargin>1in</RightMargin>
+        <TopMargin>1in</TopMargin>
+        <BottomMargin>1in</BottomMargin>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="ExecutionID">
+      <DataType>String</DataType>
+      <Prompt>Execution ID</Prompt>
+      <Hidden>true</Hidden>
+    </ReportParameter>
+  </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>1</NumberOfColumns>
+      <NumberOfRows>1</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>ExecutionID</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <EmbeddedImages>
+    <EmbeddedImage Name="Error">
+      <MIMEType>image/jpeg</MIMEType>
+      <ImageData>/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAAbABsDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9hv2qP2qP+Fb/ANtaLoutaH4dk8OaZHq/ijxRq8D3Fh4Ts5XZIQIVKm6vrhkdYbdWGMb3zmGG4+MfBH7W99+0dpHjrxN4F8D/ABy+Jmh+A7f7Vqmvar8XbvwldTjazkQadpvl2pYRq7hFRTtVQQGZUPmf/BXvx9qifBDRLXzZ
+DD46+J/jLUtaYf8ALabSL4aRYIx9Fs4o8KeCYlOOARmf8EmPiA3hr9ir9sRBOsL2Pgxb61B/56tZammf++liH41+d47OalbMlhG+WPK3eyf2HOOkk1ta7s3e6vayX9rcK+F+CyzgWXEnJ7Ss6tOmlzTh/wAxEMPVbnSlTqu8+fkipqCgoScHNylL6k/Y9/4Kc6b4s8O3+uaZ4m8ReJ/Cfh63F34n8P8AiaKKTxN4Ts8gNqVrcQKF1HT4s/vVdTcouZPMY7IH++7K9h1KzhuLeaO4t7hBJFLGwZJFIyGBHBBByCK/nL/4J2/EW++Hf7c/wpuNLkbzrzxFaaTPEPmWe2upBbzow6FfLkYkHuoPUA1+4P7BGrNpX7L2j6PCXuLHwrqeseG9Pcktmy07Vbyxtee+Le3iGe+K9bhHNquOpuFTdX/C35823S2mjSX559JTw3y7hHHxr4N2pz5baK/v+00aikrxdN2na81JKV5QlOp88f8ABTb9kXTfE/hXxVpPiDULHw34P8VaxH4n8PeKroH7D4Q8QtEttPa37D/U2F8oV1n+6lxJNvO5rdH+I/hd+xt8Qv2evht8bvC/jfwH8cv+Ei8VaBHp/ho+BrN9S0XWXDtIgupoA8ZiMggPzlcQtcLwzbT+617ZQ6lZzW9xDHcW9whjlikQMkikYKsDwQRwQeteC6z/AME7fhNZStHpOi+IPCtjckmTTvDHi3WPD+mtk5P+iWN1DAM98Jzk1tjuF6WJxKxEd7Nb2VmmnfR33dtrbaqyXjcLePePyXIpZNXb9nzU5aRUnzU5QlFxbnDkvyRVRe+p6yShNzlP8qf2DP2IfG37Nfxi0vXvE2l2Nz8bry2dvAngEzrc3OmyyqYxreriMlbWxt1YuA5DyuNi4cAV+z37OfwUs/2ePgZ4X8FWlxLfx+HbCO1kvJuZb2b70s7/AO3JIzufdzUfwN/Zp8A/s2aJcWPgXwno3hmG/k8+8e0gxPfS95J5jmSZ
+z/ekZj713Vehk+TUMupezor+uuvVuyu9NlorHxXiN4lZpxhjnjcxlfbpZWV+VKN3yxjzScY3k05zbnLm0//Z</ImageData>
+    </EmbeddedImage>
+    <EmbeddedImage Name="Warning">
+      <MIMEType>image/jpeg</MIMEType>
+      <ImageData>/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAAWABgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD97/EniOw8HeHb7VtUu7fT9M0u3ku7u5ncJHbxIpZ3ZjwFCgkn0FfjV8K/+CsPiSH9uOz+OmtfEXT5Phl8QtRi0Ob4btqqfb/BXhqdoYtB8RXFmWDwi9uJsyu6qoi1XTnLMoQD6o/4LCfFr/hfPjnwn+ynot9LBD48g/4SD4lX
+VtL5cmm+FIJAr2u5WBSTUJgLZSMkR+e2MLXx3e/so+D/AB1/wVn+Pl1qlnoV34b8bfCjTNDudHtrmFXhiuBb2cirAp3w7IdLt9jhQF82MqckV+F+IPiJl2AxVWFStZ4WHtLKzbanGOze93aOzTjJSThPX67Jckr1qcZRjdVHy66aWb/4f1VtUftzY3sWpWUNxBIskNwgkjcdHUjIP4iivib/AIIwftNa14g8A+Ivgf8AEDUWv/iR8FbiPTJr2bh/EGmSLvsNTHJz58GC+SSJo7heNlFfr2R5xQzTA0sfh2nGaT01Wqvpto1rF2V4tPZnzeMws8PWlRnun/X/AAez0Pn/AMYfsI/tBeFv2o/i9400n4sfDCbUPiL4hN7cTav4Lu7y6tbOBTFZWKul/Gvk28WQAEGXllc8vgcbof8AwTU+Nfhr9oDXPipY+Ofgfb/EDxLpsekalq48D6qz3VrH5O2MxHVjEvFvACyoGIhQEnHJRX80YzLsJPE1qsqMHKouSb5Y3nBcqUZO15R92Okrr3V2R95Tr1FThFSdo6pXej7rs9Xt3PRP2ef2I/jp4f8A27fAPxV1v4mfDe5vNFs5tAv7bRvCd1pr63p8ziRbeaR7yYYhmzKhCAjzJVziQ4KKK/a/C2jSpZbOlRgoxjKyiklFK19EklfXe17JK9kkvlOIpSlXUpNttXu3r9/9de7P/9k=</ImageData>
+    </EmbeddedImage>
+    <EmbeddedImage Name="Information">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAFzUkdCAK7OHOkAAAAEZ0FNQQAAsY8L/GEFAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAABZ0RVh0VGl0bGUASW5mb3JtYXRpb24gSWNvbofPLU8AAABJdEVYdENvcHlyaWdodABQdWJsaWMgRG9tYWluIGh0dHA6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL3B1YmxpY2RvbWFpbi9Zw/7KAAAEX0lEQVRIS51WXUybVRh++rWUj/6MldHBGD8bS7ZsxEBiprvARYcxaqK7YqgX7M7EmOiFJhpiohdGFvXKaDTGRLZkMxs3Oi9kSa0R5gaDNaAr7keopaXA+kfbr6WUtsf3fD1dKXwQ4pM0Tc77vs853znnfZ6jYwRoIJ3JwRdSMH5vCUo6h2gijUwur8aMej1s1kpYZD2OH6lDU60FslGvxjZCc4LRv5fgnAzAbNLjZNs+JFaySK/lEKFJOGqsMuQKCdaqCgy7F6Ckcujq2I8TR/eq8fXYNEHf+VvYJVeg++QhTM4EcXVsDgZJh8Y9FuyprlRzwrFV+MIKcnmGl59sRschOwaHZxBPr+GTs0+oOY/AJyjiTL+DXZvwsfmwwh57Y5Cd/miIeRbjLKqkRUYJ9DVqjOfwXF7Da18hjvV4NEHf96NsaMLLpmZCrK7nArvjiYhIAT847xPRFfbudzdYOF4+Ic/lNbx2aNzL+gbGRERMcHN6gZ27fJsFaBV7ewaY21tO7nD52YGzF9WV7nvtAnvr6z9EpAT3vxG1ln9J/2UXG51eVMeldCaLX6cW0N3Ziuc++AXOcy/hWLNNbGABc0EFkl6CvboKzXYrZhdjWE6uimgBx1psau3zxNHdeRCOqXn1JkpzwRTdBj0m
+ZyNorbOi7UCNKCmhyW5GKJqCP5jAn54wGmvN2G0uHPh68NqDxDFFXOYqI3yUj0vOe8z1IMh6P3fSocXUz9LCQiTF+q+42PW/5sWINjhH72dOdvufILvofMCkRDqLRDoDutao1lhVEYlUBkebduNhIoNAJClGN4Nz6PU6KCtr1D8ZSFFlFSuZPBqoG21mo0grh2PSj55+B975dhRvfjmCr666RWQzOEcjbekK7T8/J2ktmycZyMC+S6a204m0EnwPFfR+6gQtCg12C+qrTYgkCx2tCeKotcgqJ+emjdkeMwsxBC714sUTLUhQEairK0mLdgqpwiCRthgRjNOqNHTv6fb96n80vgodkXNoqmMRxBFS0iSGRnBuyUaHIhslBEg5o0la4RbQ2D1NcA5/MIkqUld+lSVrlQFW2Yg1UuLYhubZEtt8AufI5RgspLRW6gXp8cP1GHEHSBVb8PY3N0Xa1iBxganSgDyR3PUvi9ESOMdpOq/hO4s4frgWUrPdRPc1h47WGniWEiBNEanlyNPe8m0yGQ3w0s16/YvfEYqV3yZeyznaiStJPdBEsiLJVNDV3oDB6x4MffwCTr3/M6bnoqKkhCytmBPGqfA30pkj1HSdbfUiCkx7o+iiWs7BuZ6ly6G6nOhwkuuxbeXaRa3/zHs/sVP0+/GGR4wWUJDr82xqluT6loZcF1E0HC7bquF8WDAcbi4bsUwmtN5weM21cR97dYPhbLbMAbJMugHdT5FlzobIMr2alukny8yqltlC51eLwRFty9yZ6afI9LNk+tRAHDUkBTI1kdX0P0y/iOKzZUI8W/iLovRskahT5R08W4D/ALQUdj57Oe6hAAAAAElFTkSuQmCC</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
+  <Language>en-US</Language>
+  <Variables>
+    <Variable Name="Heading1_FontFamily">
+      <Value>=Lookup("Heading1", Fields!StyleName.Value, Fields!FontFamily.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="Heading1_FontSize">
+      <Value>=Lookup("Heading1", Fields!StyleName.Value, Fields!FontSize.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="Heading1_FontWeight">
+      <Value>=iif((Lookup("Heading1", Fields!StyleName.Value, Fields!FontWeight.Value, "ReportStyle"))=True,"Bold","Default")</Value>
+    </Variable>
+    <Variable Name="Heading1_BackgroundColor">
+      <Value>=Lookup("Heading1", Fields!StyleName.Value, Fields!BackgroundColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="Heading1_FontColor">
+      <Value>=Lookup("Heading1", Fields!StyleName.Value, Fields!FontColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="Heading2_FontFamily">
+      <Value>=Lookup("Heading2", Fields!StyleName.Value, Fields!FontFamily.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="Heading2_FontSize">
+      <Value>=Lookup("Heading2", Fields!StyleName.Value, Fields!FontSize.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="Heading2_FontWeight">
+      <Value>=iif((Lookup("Heading2", Fields!StyleName.Value, Fields!FontWeight.Value, "ReportStyle"))=True,"Bold","Default")</Value>
+    </Variable>
+    <Variable Name="Heading2_BackgroundColor">
+      <Value>=IIF((Lookup("Heading2", Fields!StyleName.Value, Fields!BackgroundColor.Value, "ReportStyle"))="","No Color",Lookup("Heading2", Fields!StyleName.Value, Fields!BackgroundColor.Value, "ReportStyle"))</Value>
+    </Variable>
+    <Variable Name="Heading2_FontColor">
+      <Value>=Lookup("Heading2", Fields!StyleName.Value, Fields!FontColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="Heading3_FontFamily">
+      <Value>=Lookup("Heading3", Fields!StyleName.Value, Fields!FontFamily.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="Heading3_FontSize">
+      <Value>=Lookup("Heading3", Fields!StyleName.Value, Fields!FontSize.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="Heading3_FontWeight">
+      <Value>=iif((Lookup("Heading3", Fields!StyleName.Value, Fields!FontWeight.Value, "ReportStyle"))=True,"Bold","Default")</Value>
+    </Variable>
+    <Variable Name="Heading3_BackgroundColor">
+      <Value>=Lookup("Heading3", Fields!StyleName.Value, Fields!BackgroundColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="Heading3_FontColor">
+      <Value>=Lookup("Heading3", Fields!StyleName.Value, Fields!FontColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="Heading4_FontFamily">
+      <Value>=Lookup("Heading4", Fields!StyleName.Value, Fields!FontFamily.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="Heading4_FontSize">
+      <Value>=Lookup("Heading4", Fields!StyleName.Value, Fields!FontSize.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="Heading4_FontWeight">
+      <Value>=iif((Lookup("Heading4", Fields!StyleName.Value, Fields!FontWeight.Value, "ReportStyle"))=True,"Bold","Default")</Value>
+    </Variable>
+    <Variable Name="Heading4_BackgroundColor">
+      <Value>=Lookup("Heading4", Fields!StyleName.Value, Fields!BackgroundColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="Heading4_FontColor">
+      <Value>=Lookup("Heading4", Fields!StyleName.Value, Fields!FontColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="Heading5_FontFamily">
+      <Value>=Lookup("Heading5", Fields!StyleName.Value, Fields!FontFamily.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="Heading5_FontSize">
+      <Value>=Lookup("Heading5", Fields!StyleName.Value, Fields!FontSize.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="Heading5_FontWeight">
+      <Value>=iif((Lookup("Heading5", Fields!StyleName.Value, Fields!FontWeight.Value, "ReportStyle"))=True,"Bold","Default")</Value>
+    </Variable>
+    <Variable Name="Heading5_BackgroundColor">
+      <Value>=Lookup("Heading5", Fields!StyleName.Value, Fields!BackgroundColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="Heading5_FontColor">
+      <Value>=Lookup("Heading5", Fields!StyleName.Value, Fields!FontColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableHeading_FontFamily">
+      <Value>=Lookup("TableHeading", Fields!StyleName.Value, Fields!FontFamily.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableHeading_FontSize">
+      <Value>=Lookup("TableHeading", Fields!StyleName.Value, Fields!FontSize.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableHeading_FontWeight">
+      <Value>=iif((Lookup("TableHeading", Fields!StyleName.Value, Fields!FontWeight.Value, "ReportStyle"))=True,"Bold","Default")</Value>
+    </Variable>
+    <Variable Name="TableHeading_BackgroundColor">
+      <Value>=Lookup("TableHeading", Fields!StyleName.Value, Fields!BackgroundColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableHeading_FontColor">
+      <Value>=Lookup("TableHeading", Fields!StyleName.Value, Fields!FontColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableSubLevel1_FontFamily">
+      <Value>=Lookup("TableSubLevel1", Fields!StyleName.Value, Fields!FontFamily.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableSubLevel1_FontSize">
+      <Value>=Lookup("TableSubLevel1", Fields!StyleName.Value, Fields!FontSize.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableSubLevel1_FontWeight">
+      <Value>=iif((Lookup("TableSubLevel1", Fields!StyleName.Value, Fields!FontWeight.Value, "ReportStyle"))=True,"Bold","Default")</Value>
+    </Variable>
+    <Variable Name="TableSubLevel1_BackgroundColor">
+      <Value>=Lookup("TableSubLevel1", Fields!StyleName.Value, Fields!BackgroundColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableSubLevel1_FontColor">
+      <Value>=Lookup("TableSubLevel1", Fields!StyleName.Value, Fields!FontColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableSubLevel2_FontFamily">
+      <Value>=Lookup("TableSubLevel2", Fields!StyleName.Value, Fields!FontFamily.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableSubLevel2_FontSize">
+      <Value>=Lookup("TableSubLevel2", Fields!StyleName.Value, Fields!FontSize.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableSubLevel2_FontWeight">
+      <Value>=iif((Lookup("TableSubLevel2", Fields!StyleName.Value, Fields!FontWeight.Value, "ReportStyle"))=True,"Bold","Default")</Value>
+    </Variable>
+    <Variable Name="TableSubLevel2_BackgroundColor">
+      <Value>=Lookup("TableSubLevel2", Fields!StyleName.Value, Fields!BackgroundColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableSubLevel2_FontColor">
+      <Value>=Lookup("TableSubLevel2", Fields!StyleName.Value, Fields!FontColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableSubLevel3_FontFamily">
+      <Value>=Lookup("TableSubLevel3", Fields!StyleName.Value, Fields!FontFamily.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableSubLevel3_FontSize">
+      <Value>=Lookup("TableSubLevel3", Fields!StyleName.Value, Fields!FontSize.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableSubLevel3_FontWeight">
+      <Value>=iif((Lookup("TableSubLevel3", Fields!StyleName.Value, Fields!FontWeight.Value, "ReportStyle"))=True,"Bold","Default")</Value>
+    </Variable>
+    <Variable Name="TableSubLevel3_BackgroundColor">
+      <Value>=Lookup("TableSubLevel3", Fields!StyleName.Value, Fields!BackgroundColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableSubLevel3_FontColor">
+      <Value>=Lookup("TableSubLevel3", Fields!StyleName.Value, Fields!FontColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableCellWarning_FontFamily">
+      <Value>=Lookup("TableCellWarning", Fields!StyleName.Value, Fields!FontFamily.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableCellWarning_FontSize">
+      <Value>=Lookup("TableCellWarning", Fields!StyleName.Value, Fields!FontSize.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableCellWarning_FontWeight">
+      <Value>=iif((Lookup("TableCellWarning", Fields!StyleName.Value, Fields!FontWeight.Value, "ReportStyle"))=True,"Bold","Default")</Value>
+    </Variable>
+    <Variable Name="TableCellWarning_BackgroundColor">
+      <Value>=Lookup("TableCellWarning", Fields!StyleName.Value, Fields!BackgroundColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableCellWarning_FontColor">
+      <Value>=Lookup("TableCellWarning", Fields!StyleName.Value, Fields!FontColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableAlternatingRows_FontFamily">
+      <Value>=Lookup("TableAlternatingRows", Fields!StyleName.Value, Fields!FontFamily.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableAlternatingRows_FontSize">
+      <Value>=Lookup("TableAlternatingRows", Fields!StyleName.Value, Fields!FontSize.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableAlternatingRows_FontWeight">
+      <Value>=iif((Lookup("TableAlternatingRows", Fields!StyleName.Value, Fields!FontWeight.Value, "ReportStyle"))=True,"Bold","Default")</Value>
+    </Variable>
+    <Variable Name="TableAlternatingRows_BackgroundColor">
+      <Value>=Lookup("TableAlternatingRows", Fields!StyleName.Value, Fields!BackgroundColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableAlternatingRows_FontColor">
+      <Value>=Lookup("TableAlternatingRows", Fields!StyleName.Value, Fields!FontColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="BodyText_FontFamily">
+      <Value>=Lookup("BodyText", Fields!StyleName.Value, Fields!FontFamily.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="BodyText_FontSize">
+      <Value>=Lookup("BodyText", Fields!StyleName.Value, Fields!FontSize.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="BodyText_FontWeight">
+      <Value>=iif((Lookup("BodyText", Fields!StyleName.Value, Fields!FontWeight.Value, "ReportStyle"))=True,"Bold","Default")</Value>
+    </Variable>
+    <Variable Name="BodyText_BackgroundColor">
+      <Value>=Lookup("BodyText", Fields!StyleName.Value, Fields!BackgroundColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="BodyText_FontColor">
+      <Value>=Lookup("BodyText", Fields!StyleName.Value, Fields!FontColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="BodyTextWarning_FontFamily">
+      <Value>=Lookup("BodyTextWarning", Fields!StyleName.Value, Fields!FontFamily.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="BodyTextWarning_FontSize">
+      <Value>=Lookup("BodyTextWarning", Fields!StyleName.Value, Fields!FontSize.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="BodyTextWarning_FontWeight">
+      <Value>=iif((Lookup("BodyTextWarning", Fields!StyleName.Value, Fields!FontWeight.Value, "ReportStyle"))=True,"Bold","Default")</Value>
+    </Variable>
+    <Variable Name="BodyTextWarning_BackgroundColor">
+      <Value>=Lookup("BodyTextWarning", Fields!StyleName.Value, Fields!BackgroundColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="BodyTextWarning_FontColor">
+      <Value>=Lookup("BodyTextWarning", Fields!StyleName.Value, Fields!FontColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="BodyTextSuccess_FontFamily">
+      <Value>=Lookup("BodyTextSuccess", Fields!StyleName.Value, Fields!FontFamily.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="BodyTextSuccess_FontSize">
+      <Value>=Lookup("BodyTextSuccess", Fields!StyleName.Value, Fields!FontSize.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="BodyTextSuccess_FontWeight">
+      <Value>=iif((Lookup("BodyTextSuccess", Fields!StyleName.Value, Fields!FontWeight.Value, "ReportStyle"))=True,"Bold","Default")</Value>
+    </Variable>
+    <Variable Name="BodyTextSuccess_BackgroundColor">
+      <Value>=Lookup("BodyTextSuccess", Fields!StyleName.Value, Fields!BackgroundColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="BodyTextSuccess_FontColor">
+      <Value>=Lookup("BodyTextSuccess", Fields!StyleName.Value, Fields!FontColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="Buttons_FontFamily">
+      <Value>=Lookup("Buttons", Fields!StyleName.Value, Fields!FontFamily.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="Buttons_FontSize">
+      <Value>=Lookup("Buttons", Fields!StyleName.Value, Fields!FontSize.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="Buttons_FontWeight">
+      <Value>=iif((Lookup("Buttons", Fields!StyleName.Value, Fields!FontWeight.Value, "ReportStyle"))=True,"Bold","Default")</Value>
+    </Variable>
+    <Variable Name="Buttons_BackgroundColor">
+      <Value>=Lookup("Buttons", Fields!StyleName.Value, Fields!BackgroundColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="Buttons_FontColor">
+      <Value>=Lookup("Buttons", Fields!StyleName.Value, Fields!FontColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableCurrentRow_FontFamily">
+      <Value>=Lookup("TableCurrentRow", Fields!StyleName.Value, Fields!FontFamily.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableCurrentRow_FontSize">
+      <Value>=Lookup("TableCurrentRow", Fields!StyleName.Value, Fields!FontSize.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableCurrentRow_FontWeight">
+      <Value>=iif((Lookup("TableCurrentRow", Fields!StyleName.Value, Fields!FontWeight.Value, "ReportStyle"))=True,"Bold","Default")</Value>
+    </Variable>
+    <Variable Name="TableCurrentRow_BackgroundColor">
+      <Value>=Lookup("TableCurrentRow", Fields!StyleName.Value, Fields!BackgroundColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableCurrentRow_FontColor">
+      <Value>=Lookup("TableCurrentRow", Fields!StyleName.Value, Fields!FontColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableHeadingSubLevel_FontFamily">
+      <Value>=Lookup("TableHeadingSubLevel", Fields!StyleName.Value, Fields!FontFamily.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableHeadingSubLevel_FontSize">
+      <Value>=Lookup("TableHeadingSubLevel", Fields!StyleName.Value, Fields!FontSize.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableHeadingSubLevel_FontWeight">
+      <Value>=Lookup("TableHeadingSubLevel", Fields!StyleName.Value, Fields!FontWeight.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableHeadingSubLevel_BackgroundColor">
+      <Value>=Lookup("TableHeadingSubLevel", Fields!StyleName.Value, Fields!BackgroundColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="TableHeadingSubLevel_FontColor">
+      <Value>=Lookup("TableHeadingSubLevel", Fields!StyleName.Value, Fields!FontColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="BodyTextSubLevel_FontFamily">
+      <Value>=Lookup("BodyTextSubLevel", Fields!StyleName.Value, Fields!FontFamily.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="BodyTextSubLevel_FontSize">
+      <Value>=Lookup("BodyTextSubLevel", Fields!StyleName.Value, Fields!FontSize.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="BodyTextSubLevel_FontWeight">
+      <Value>=Lookup("BodyTextSubLevel", Fields!StyleName.Value, Fields!FontWeight.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="BodyTextSubLevel_BackgroundColor">
+      <Value>=Lookup("BodyTextSubLevel", Fields!StyleName.Value, Fields!BackgroundColor.Value, "ReportStyle")</Value>
+    </Variable>
+    <Variable Name="BodyTextSubLevel_FontColor">
+      <Value>=Lookup("BodyTextSubLevel", Fields!StyleName.Value, Fields!FontColor.Value, "ReportStyle")</Value>
+    </Variable>
+  </Variables>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>9e65c249-a8ed-4774-9a9a-2401fb0baad1</rd:ReportID>
+</Report>
