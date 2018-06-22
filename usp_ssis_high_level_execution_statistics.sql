@@ -1,4 +1,4 @@
-USE dw_valuation;
+USE SSISDBDemo;
 GO
 
 /****** Object:  StoredProcedure [dbo].[usp_ssis_high_level_execution_statistics]    Script Date: 5/4/2018 7:13:49 PM ******/

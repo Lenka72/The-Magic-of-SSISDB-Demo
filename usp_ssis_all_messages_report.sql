@@ -1,11 +1,11 @@
-USE RandomActsOfSQL
+USE SSISDBDemo
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_ssis_all_messages_report]    Script Date: 2/23/2018 9:58:06 PM ******/
-DROP PROCEDURE IF EXISTS [dbo].[usp_ssis_all_messages_report]
+/****** Object:  StoredProcedure [dbo].[usp_ssis_all_messages_report]    Script Date: 2/2/2018 10:07:02 PM ******/
+DROP PROCEDURE [dbo].[usp_ssis_all_messages_report]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_ssis_all_messages_report]    Script Date: 2/23/2018 9:58:06 PM ******/
+/****** Object:  StoredProcedure [dbo].[usp_ssis_all_messages_report]    Script Date: 2/2/2018 10:07:02 PM ******/
 SET ANSI_NULLS ON
 GO
 

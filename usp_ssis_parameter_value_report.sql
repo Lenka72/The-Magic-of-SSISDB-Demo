@@ -1,4 +1,4 @@
-USE RandomActsOfSQL;
+USE SSISDBDemo
 GO
 
 /****** Object:  StoredProcedure [dbo].[usp_ssis_parameter_value_report]    Script Date: 2/25/2018 9:29:19 PM ******/
