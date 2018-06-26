@@ -25,7 +25,7 @@ CREATE PROCEDURE dbo.usp_ssis_parameter_value_report (
         @FolderName NVARCHAR(MAX) = NULL
        ,@ProjectName NVARCHAR(MAX) = NULL
        ,@PackageName NVARCHAR(MAX) = NULL
-       ,@UserId dtUserId)
+       ,@UserId VARCHAR(25))
 AS
 BEGIN
         SET NOCOUNT ON;
